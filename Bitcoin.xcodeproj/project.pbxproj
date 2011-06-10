@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		553F897713A227C100DFC4FA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553F897613A227C100DFC4FA /* UIKit.framework */; };
+		553F897913A227C100DFC4FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553F897813A227C100DFC4FA /* Foundation.framework */; };
+		553F897B13A227C100DFC4FA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553F897A13A227C100DFC4FA /* CoreGraphics.framework */; };
+		553F898113A227C100DFC4FA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 553F897F13A227C100DFC4FA /* InfoPlist.strings */; };
+		553F898413A227C100DFC4FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F898313A227C100DFC4FA /* main.m */; };
+		553F898713A227C100DFC4FA /* BitcoinAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F898613A227C100DFC4FA /* BitcoinAppDelegate.m */; };
+		553F898A13A227C100DFC4FA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553F898813A227C100DFC4FA /* MainWindow.xib */; };
+		553F898D13A227C100DFC4FA /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F898C13A227C100DFC4FA /* RootViewController.m */; };
+		553F899013A227C100DFC4FA /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553F898E13A227C100DFC4FA /* RootViewController.xib */; };
+		553F899813A228DD00DFC4FA /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F899713A228DD00DFC4FA /* JSONKit.m */; };
+		553F899B13A2293900DFC4FA /* Market.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F899A13A2293900DFC4FA /* Market.m */; };
+		553F899D13A2306B00DFC4FA /* Markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 553F899C13A2306B00DFC4FA /* Markets.json */; };
+		553F89A013A232B900DFC4FA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F899F13A232B900DFC4FA /* GCDAsyncSocket.m */; };
+		553F89AA13A2351300DFC4FA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553F89A913A2351300DFC4FA /* CFNetwork.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		553F897213A227C100DFC4FA /* Bitcoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bitcoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		553F897613A227C100DFC4FA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		553F897813A227C100DFC4FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		553F897A13A227C100DFC4FA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		553F897E13A227C100DFC4FA /* Bitcoin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bitcoin-Info.plist"; sourceTree = "<group>"; };
+		553F898013A227C100DFC4FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		553F898213A227C100DFC4FA /* Bitcoin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bitcoin-Prefix.pch"; sourceTree = "<group>"; };
+		553F898313A227C100DFC4FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		553F898513A227C100DFC4FA /* BitcoinAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitcoinAppDelegate.h; sourceTree = "<group>"; };
+		553F898613A227C100DFC4FA /* BitcoinAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BitcoinAppDelegate.m; sourceTree = "<group>"; };
+		553F898913A227C100DFC4FA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		553F898B13A227C100DFC4FA /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		553F898C13A227C100DFC4FA /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		553F898F13A227C100DFC4FA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+		553F899613A228DD00DFC4FA /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		553F899713A228DD00DFC4FA /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		553F899913A2293900DFC4FA /* Market.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Market.h; sourceTree = "<group>"; };
+		553F899A13A2293900DFC4FA /* Market.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Market.m; sourceTree = "<group>"; };
+		553F899C13A2306B00DFC4FA /* Markets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Markets.json; sourceTree = "<group>"; };
+		553F899E13A232B900DFC4FA /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		553F899F13A232B900DFC4FA /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		553F89A913A2351300DFC4FA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		553F896F13A227C100DFC4FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				553F897713A227C100DFC4FA /* UIKit.framework in Frameworks */,
+				553F897913A227C100DFC4FA /* Foundation.framework in Frameworks */,
+				553F897B13A227C100DFC4FA /* CoreGraphics.framework in Frameworks */,
+				553F89AA13A2351300DFC4FA /* CFNetwork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		553F896713A227C100DFC4FA = {
+			isa = PBXGroup;
+			children = (
+				553F897C13A227C100DFC4FA /* Bitcoin */,
+				553F897513A227C100DFC4FA /* Frameworks */,
+				553F897313A227C100DFC4FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		553F897313A227C100DFC4FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				553F897213A227C100DFC4FA /* Bitcoin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		553F897513A227C100DFC4FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				553F89A913A2351300DFC4FA /* CFNetwork.framework */,
+				553F897613A227C100DFC4FA /* UIKit.framework */,
+				553F897813A227C100DFC4FA /* Foundation.framework */,
+				553F897A13A227C100DFC4FA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		553F897C13A227C100DFC4FA /* Bitcoin */ = {
+			isa = PBXGroup;
+			children = (
+				553F898513A227C100DFC4FA /* BitcoinAppDelegate.h */,
+				553F898613A227C100DFC4FA /* BitcoinAppDelegate.m */,
+				553F898813A227C100DFC4FA /* MainWindow.xib */,
+				553F898B13A227C100DFC4FA /* RootViewController.h */,
+				553F898C13A227C100DFC4FA /* RootViewController.m */,
+				553F898E13A227C100DFC4FA /* RootViewController.xib */,
+				553F899613A228DD00DFC4FA /* JSONKit.h */,
+				553F899713A228DD00DFC4FA /* JSONKit.m */,
+				553F899E13A232B900DFC4FA /* GCDAsyncSocket.h */,
+				553F899F13A232B900DFC4FA /* GCDAsyncSocket.m */,
+				553F899913A2293900DFC4FA /* Market.h */,
+				553F899A13A2293900DFC4FA /* Market.m */,
+				553F897D13A227C100DFC4FA /* Supporting Files */,
+			);
+			path = Bitcoin;
+			sourceTree = "<group>";
+		};
+		553F897D13A227C100DFC4FA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				553F897E13A227C100DFC4FA /* Bitcoin-Info.plist */,
+				553F897F13A227C100DFC4FA /* InfoPlist.strings */,
+				553F898213A227C100DFC4FA /* Bitcoin-Prefix.pch */,
+				553F898313A227C100DFC4FA /* main.m */,
+				553F899C13A2306B00DFC4FA /* Markets.json */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		553F897113A227C100DFC4FA /* Bitcoin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 553F899313A227C100DFC4FA /* Build configuration list for PBXNativeTarget "Bitcoin" */;
+			buildPhases = (
+				553F896E13A227C100DFC4FA /* Sources */,
+				553F896F13A227C100DFC4FA /* Frameworks */,
+				553F897013A227C100DFC4FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Bitcoin;
+			productName = Bitcoin;
+			productReference = 553F897213A227C100DFC4FA /* Bitcoin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		553F896913A227C100DFC4FA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 553F896C13A227C100DFC4FA /* Build configuration list for PBXProject "Bitcoin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 553F896713A227C100DFC4FA;
+			productRefGroup = 553F897313A227C100DFC4FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				553F897113A227C100DFC4FA /* Bitcoin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		553F897013A227C100DFC4FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				553F898113A227C100DFC4FA /* InfoPlist.strings in Resources */,
+				553F898A13A227C100DFC4FA /* MainWindow.xib in Resources */,
+				553F899013A227C100DFC4FA /* RootViewController.xib in Resources */,
+				553F899D13A2306B00DFC4FA /* Markets.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		553F896E13A227C100DFC4FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				553F898413A227C100DFC4FA /* main.m in Sources */,
+				553F898713A227C100DFC4FA /* BitcoinAppDelegate.m in Sources */,
+				553F898D13A227C100DFC4FA /* RootViewController.m in Sources */,
+				553F899813A228DD00DFC4FA /* JSONKit.m in Sources */,
+				553F899B13A2293900DFC4FA /* Market.m in Sources */,
+				553F89A013A232B900DFC4FA /* GCDAsyncSocket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		553F897F13A227C100DFC4FA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				553F898013A227C100DFC4FA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		553F898813A227C100DFC4FA /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				553F898913A227C100DFC4FA /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		553F898E13A227C100DFC4FA /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				553F898F13A227C100DFC4FA /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		553F899113A227C100DFC4FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		553F899213A227C100DFC4FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		553F899413A227C100DFC4FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bitcoin/Bitcoin-Prefix.pch";
+				INFOPLIST_FILE = "Bitcoin/Bitcoin-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		553F899513A227C100DFC4FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bitcoin/Bitcoin-Prefix.pch";
+				INFOPLIST_FILE = "Bitcoin/Bitcoin-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		553F896C13A227C100DFC4FA /* Build configuration list for PBXProject "Bitcoin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				553F899113A227C100DFC4FA /* Debug */,
+				553F899213A227C100DFC4FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		553F899313A227C100DFC4FA /* Build configuration list for PBXNativeTarget "Bitcoin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				553F899413A227C100DFC4FA /* Debug */,
+				553F899513A227C100DFC4FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 553F896913A227C100DFC4FA /* Project object */;
+}
