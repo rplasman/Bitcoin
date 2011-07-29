@@ -14,6 +14,7 @@
 }
 
 @property (nonatomic, assign) double close;
+@property (nonatomic, assign) double previousClose;
 @property (nonatomic, copy) NSString *symbol;
 @property (nonatomic, retain) NSDate *latestTrade;
 

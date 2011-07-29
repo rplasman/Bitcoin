@@ -10,14 +10,17 @@
 #import "JSONKit.h"
 #import "Market.h"
 #import "GCDAsyncSocket.h"
+#import "MarketCellBackgroundView.h"
+#import "SettingsViewController.h"
 
-@interface RootViewController () <GCDAsyncSocketDelegate>
+@interface RootViewController () <GCDAsyncSocketDelegate, SettingsViewControllerDelegate>
 
 @property (nonatomic, retain) NSMutableData *receivedData;
 @property (nonatomic, retain) NSArray *markets;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 @property (nonatomic, retain) GCDAsyncSocket *asyncSocket;
 @property (nonatomic, retain) NSData *delimiterData;
+@property (nonatomic, retain) NSMutableArray *indexPaths;
 
 - (void)reloadData;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -26,6 +29,9 @@
 - (void)archiveMarkets;
 - (void)unarchiveMarkets;
 - (BOOL)shouldReloadData;
+- (void)update;
+- (void)connect;
+- (void)presentSettingsViewControllerAnimated:(BOOL)animated;
 
 @end
 
@@ -36,22 +42,55 @@
 @synthesize dateFormatter			= _dateFormatter;
 @synthesize asyncSocket				= _asyncSocket;
 @synthesize delimiterData			= _delimiterData;
+@synthesize titleView				= _titleView;
+@synthesize titleLabel				= _titleLabel;
+@synthesize subtitleLabel			= _subtitleLabel;
+@synthesize indexPaths				= _indexPaths;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
 	self = [super initWithCoder:aDecoder];
 	
 	if (self) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+		_delimiterData = [[GCDAsyncSocket ZeroData] retain];
+		_indexPaths = [[NSMutableArray alloc] init];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:)	name:UIApplicationDidEnterBackgroundNotification	object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:)	name:UIApplicationWillEnterForegroundNotification	object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:)		name:UIApplicationWillTerminateNotification			object:nil];
 	}
 	
 	return self;
 }
 
+- (void)connect
+{
+	if ([_asyncSocket isConnected]) {
+		return;
+	}
+	
+	GCDAsyncSocket *asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+	self.asyncSocket = asyncSocket;
+	[asyncSocket release];
+	
+	[_asyncSocket connectToHost:@"bitcoincharts.com" onPort:27007 error:nil];
+}
+
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
 	[self archiveMarkets];
+	
+	__block GCDAsyncSocket *asyncSocket = _asyncSocket;
+	UIBackgroundTaskIdentifier backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+		[_asyncSocket disconnect];
+		[[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
+	}];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+	[self connect];
+	[self update];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
@@ -91,35 +130,55 @@
 
 - (BOOL)shouldReloadData
 {
-	NSDate *lastUpdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastUpdate"];
+	NSDate *lastReload = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastReload"];
 	NSDate *now = [NSDate date];
-	NSTimeInterval timeInterval = [now timeIntervalSinceDate:lastUpdate];
+	NSTimeInterval timeInterval = [now timeIntervalSinceDate:lastReload];
 	
-	DLog(@"shouldReloadData: %d", lastUpdate == nil || timeInterval > 900.0);
+	DLog(@"shouldReloadData: %d", lastReload == nil || timeInterval > 900.0);
 	
-	return lastUpdate == nil || timeInterval > 900.0;
+	return lastReload == nil || timeInterval > 900.0;
 }
 
-- (void)refresh
+- (void)settings
 {
-	if ([self shouldReloadData]) {
-		[self reloadData];
-	}
+	[self presentSettingsViewControllerAnimated:YES];
+}
+
+- (void)presentSettingsViewControllerAnimated:(BOOL)animated
+{
+	SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
+	settingsViewController.delegate = self;
+	
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+	
+	[settingsViewController release];
+	
+	[self presentModalViewController:navigationController animated:animated];
+	
+	[navigationController release];
+}
+
+- (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
+{
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
 	
+	UIBarButtonItem *settingsButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings", @"") style:UIBarButtonItemStyleBordered target:self action:@selector(settings)];
+	self.navigationItem.leftBarButtonItem = settingsButtonItem;
+	[settingsButtonItem release];
+	
 	if ([self shouldReloadData]) {
 		[self reloadData];
 	} else {
 		[self unarchiveMarkets];
+		[self performSelector:@selector(reloadData) withObject:nil afterDelay:910.0];
 	}
 	
-	UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
-	self.navigationItem.rightBarButtonItem = refreshButtonItem;
-	[refreshButtonItem release];
+	[self connect];
 	
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
@@ -127,16 +186,8 @@
 	
 	self.dateFormatter = dateFormatter;
 	[dateFormatter release];
-	
-	GCDAsyncSocket *asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-	self.asyncSocket = asyncSocket;
-	[asyncSocket release];
-	
-	self.delimiterData = [GCDAsyncSocket ZeroData];
-	
-	[_asyncSocket connectToHost:@"bitcoincharts.com" onPort:27007 error:nil];
-	
-	// [self refresh];
+
+	[self update];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
@@ -146,6 +197,7 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
+	DLog(@"%d", [NSThread isMainThread]);
 	[sock readDataToData:_delimiterData withTimeout:-1.0 tag:0];
 	
 	NSString *readString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
@@ -157,7 +209,6 @@
 	NSString *JSONString = [readString substringToIndex:range.location + 1];
 	NSDictionary *dictionary = [JSONString objectFromJSONString];
 
-	
 	NSInteger index;
 	Market *market = nil;
 	for (index = 0; index < [_markets count]; index++) {
@@ -166,33 +217,44 @@
 			market = tempMarket;
 			break;
 		}
-	}		
+	}
 	
 	if (market == nil) {
 		return;
 	}
 	
+	NSDate *now = [NSDate date];
+	[[NSUserDefaults standardUserDefaults] setObject:now forKey:@"lastUpdate"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	[self update];
+	
 	market.latestTrade = [NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:@"timestamp"] intValue]];
 	market.close = [[dictionary objectForKey:@"price"] doubleValue];
 	
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-	[self configureCell:cell atIndexPath:indexPath];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self.tableView];
+	[self.tableView performSelector:@selector(reloadData) withObject:nil afterDelay:2.0];
+}
+
+- (void)update
+{
+	if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+		return;
+	}
 	
-	NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+	[self.tableView reloadData];
+	_subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Last update: %@", @""), [self formattedStringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:@"lastUpdate"]]];
 	
-	[self.tableView beginUpdates];
-	[self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];
-	[self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
-	[self.tableView endUpdates];
+	[self performSelector:@selector(update) withObject:nil afterDelay:60.0];
 }
 
 - (void)reloadData
 {
+	[self performSelector:@selector(reloadData) withObject:nil afterDelay:910.0];
+	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	
 	NSURL *URL = [NSURL URLWithString:@"http://www.bitcoincharts.com/t/markets.json"];
-//	NSURL *URL = [NSURL URLWithString:@"http://www.google.com"];
 	NSURLRequest *request = [NSURLRequest requestWithURL:URL];
 	[NSURLConnection connectionWithRequest:request delegate:self];
 }
@@ -221,19 +283,32 @@
 	for (NSDictionary *marketDictionary in marketDictionaries)
 	{
 		Market *market = [[Market alloc] init];
-		market.close		= [[marketDictionary objectForKey:@"close"] doubleValue];
-		market.symbol		= [marketDictionary objectForKey:@"symbol"];
-		market.latestTrade	= [NSDate dateWithTimeIntervalSince1970:[[marketDictionary objectForKey:@"latest_trade"] floatValue]];
+		NSNumber *close = [marketDictionary objectForKey:@"close"];
+		if ([close isKindOfClass:[NSNumber class]]) {
+			market.close			= [close doubleValue];
+		}
+		
+		NSNumber *previousClose = [marketDictionary objectForKey:@"previous_close"];
+		if ([previousClose isKindOfClass:[NSNumber class]]) {
+			market.previousClose	= [previousClose doubleValue];
+		}
+		
+		market.symbol			= [marketDictionary objectForKey:@"symbol"];
+		market.latestTrade		= [NSDate dateWithTimeIntervalSince1970:[[marketDictionary objectForKey:@"latest_trade"] floatValue]];
 		[markets addObject:market];
 		[market release];
 	}
 	
 	self.markets = markets;
 	
-	[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastUpdate"];
+	[self archiveMarkets];
+	
+	NSDate *now = [NSDate date];
+	[[NSUserDefaults standardUserDefaults] setObject:now forKey:@"lastReload"];
+	[[NSUserDefaults standardUserDefaults] setObject:now forKey:@"lastUpdate"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	
-	[self.tableView reloadData];
+	[self update];
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
@@ -284,7 +359,11 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		
+		MarketCellBackgroundView *backgroundView = [[MarketCellBackgroundView alloc] init];
+		cell.backgroundView = backgroundView;
+		[backgroundView release];
     }
 	
 	[self configureCell:cell atIndexPath:indexPath];
@@ -295,9 +374,17 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+	if (!cell) {
+		return;
+	}
+	
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	MarketCellBackgroundView *backgroundView = (MarketCellBackgroundView *) cell.backgroundView;
+	
 	Market *market = [_markets objectAtIndex:indexPath.row];
-	cell.textLabel.text = market.symbol;
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f", market.close];
+	
+	backgroundView.market = market;
 }
 
 - (NSString *)formattedStringFromDate:(NSDate *)date
@@ -326,6 +413,11 @@
 	}
 	
 	return [_dateFormatter stringFromDate:date];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 54.0;
 }
 
 /*

@@ -8,19 +8,23 @@
 
 #import "BitcoinAppDelegate.h"
 
+@interface BitcoinAppDelegate ()
+
+
+@end
+
 @implementation BitcoinAppDelegate
 
 
-@synthesize window=_window;
-
-@synthesize navigationController=_navigationController;
+@synthesize window					= _window;
+@synthesize navigationController	= _navigationController;
+@synthesize tabBarController		= _tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// Override point for customization after application launch.
-	// Add the navigation controller's view to the window and display.
-	self.window.rootViewController = self.navigationController;
+	self.window.rootViewController = self.tabBarController;
 	[self.window makeKeyAndVisible];
+	
     return YES;
 }
 

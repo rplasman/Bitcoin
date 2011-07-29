@@ -21,6 +21,15 @@
 		553F899D13A2306B00DFC4FA /* Markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 553F899C13A2306B00DFC4FA /* Markets.json */; };
 		553F89A013A232B900DFC4FA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F899F13A232B900DFC4FA /* GCDAsyncSocket.m */; };
 		553F89AA13A2351300DFC4FA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553F89A913A2351300DFC4FA /* CFNetwork.framework */; };
+		55D5F75D13A2613900358185 /* MarketCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D5F75C13A2613900358185 /* MarketCellBackgroundView.m */; };
+		55D5F76113A26CC100358185 /* Down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D5F75F13A26CC100358185 /* Down@2x.png */; };
+		55D5F76213A26CC100358185 /* Up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D5F76013A26CC100358185 /* Up@2x.png */; };
+		55D5F76C13A2A62200358185 /* Stats@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D5F76B13A2A62200358185 /* Stats@2x.png */; };
+		55D5F76E13A2A65F00358185 /* Stats-Alternative@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D5F76D13A2A65E00358185 /* Stats-Alternative@2x.png */; };
+		55D5F77013A2A6A600358185 /* Stats.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D5F76F13A2A6A600358185 /* Stats.png */; };
+		55D5F77413A2B07700358185 /* BuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D5F77213A2B07500358185 /* BuyViewController.m */; };
+		55D5F77513A2B07700358185 /* BuyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D5F77313A2B07600358185 /* BuyViewController.xib */; };
+		55D5F77813A2B16A00358185 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D5F77713A2B16A00358185 /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +55,18 @@
 		553F899E13A232B900DFC4FA /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		553F899F13A232B900DFC4FA /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		553F89A913A2351300DFC4FA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		55D5F75B13A2613900358185 /* MarketCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketCellBackgroundView.h; sourceTree = "<group>"; };
+		55D5F75C13A2613900358185 /* MarketCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketCellBackgroundView.m; sourceTree = "<group>"; };
+		55D5F75F13A26CC100358185 /* Down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Down@2x.png"; sourceTree = "<group>"; };
+		55D5F76013A26CC100358185 /* Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Up@2x.png"; sourceTree = "<group>"; };
+		55D5F76B13A2A62200358185 /* Stats@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stats@2x.png"; sourceTree = "<group>"; };
+		55D5F76D13A2A65E00358185 /* Stats-Alternative@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stats-Alternative@2x.png"; sourceTree = "<group>"; };
+		55D5F76F13A2A6A600358185 /* Stats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stats.png; sourceTree = "<group>"; };
+		55D5F77113A2B07500358185 /* BuyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyViewController.h; sourceTree = "<group>"; };
+		55D5F77213A2B07500358185 /* BuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyViewController.m; sourceTree = "<group>"; };
+		55D5F77313A2B07600358185 /* BuyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyViewController.xib; sourceTree = "<group>"; };
+		55D5F77613A2B16900358185 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		55D5F77713A2B16A00358185 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +121,13 @@
 				553F898B13A227C100DFC4FA /* RootViewController.h */,
 				553F898C13A227C100DFC4FA /* RootViewController.m */,
 				553F898E13A227C100DFC4FA /* RootViewController.xib */,
+				55D5F77613A2B16900358185 /* SettingsViewController.h */,
+				55D5F77713A2B16A00358185 /* SettingsViewController.m */,
+				55D5F77113A2B07500358185 /* BuyViewController.h */,
+				55D5F77213A2B07500358185 /* BuyViewController.m */,
+				55D5F77313A2B07600358185 /* BuyViewController.xib */,
+				55D5F75B13A2613900358185 /* MarketCellBackgroundView.h */,
+				55D5F75C13A2613900358185 /* MarketCellBackgroundView.m */,
 				553F899613A228DD00DFC4FA /* JSONKit.h */,
 				553F899713A228DD00DFC4FA /* JSONKit.m */,
 				553F899E13A232B900DFC4FA /* GCDAsyncSocket.h */,
@@ -114,6 +142,11 @@
 		553F897D13A227C100DFC4FA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				55D5F75F13A26CC100358185 /* Down@2x.png */,
+				55D5F76013A26CC100358185 /* Up@2x.png */,
+				55D5F76F13A2A6A600358185 /* Stats.png */,
+				55D5F76B13A2A62200358185 /* Stats@2x.png */,
+				55D5F76D13A2A65E00358185 /* Stats-Alternative@2x.png */,
 				553F897E13A227C100DFC4FA /* Bitcoin-Info.plist */,
 				553F897F13A227C100DFC4FA /* InfoPlist.strings */,
 				553F898213A227C100DFC4FA /* Bitcoin-Prefix.pch */,
@@ -174,6 +207,12 @@
 				553F898A13A227C100DFC4FA /* MainWindow.xib in Resources */,
 				553F899013A227C100DFC4FA /* RootViewController.xib in Resources */,
 				553F899D13A2306B00DFC4FA /* Markets.json in Resources */,
+				55D5F76113A26CC100358185 /* Down@2x.png in Resources */,
+				55D5F76213A26CC100358185 /* Up@2x.png in Resources */,
+				55D5F76C13A2A62200358185 /* Stats@2x.png in Resources */,
+				55D5F76E13A2A65F00358185 /* Stats-Alternative@2x.png in Resources */,
+				55D5F77013A2A6A600358185 /* Stats.png in Resources */,
+				55D5F77513A2B07700358185 /* BuyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +229,9 @@
 				553F899813A228DD00DFC4FA /* JSONKit.m in Sources */,
 				553F899B13A2293900DFC4FA /* Market.m in Sources */,
 				553F89A013A232B900DFC4FA /* GCDAsyncSocket.m in Sources */,
+				55D5F75D13A2613900358185 /* MarketCellBackgroundView.m in Sources */,
+				55D5F77413A2B07700358185 /* BuyViewController.m in Sources */,
+				55D5F77813A2B16A00358185 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
